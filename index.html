@@ -108,6 +108,25 @@
     h1{font-size:20px}
     .tt td.t{width:70px;font-size:12.5px}
   }
+
+  .langbar{display:flex;gap:6px;justify-content:flex-end;margin:-4px 0 10px}
+  .langbar button{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
+  .langbar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  body.L-en .th-only,body.L-ja .th-only{display:none!important}
+  body.L-th .notth{display:none!important}
+  a.ask,button.ask{flex:none;font:inherit;font-size:12.5px;font-weight:700;border:none;border-radius:10px;padding:7px 9px;background:#fff4e5;color:#b45309;cursor:pointer}
+  .stop .nm .jn{display:block;font-size:12px;color:var(--muted)}
+  .ask-card{background:#fff8eb;border-color:#fde68a}
+  .ask-card .big{font-size:20px;font-weight:800;line-height:1.5}
+  .ov{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+  .ov.show{display:flex}
+  .ovc{background:#fff;border-radius:20px;padding:22px 20px;max-width:520px;width:100%;text-align:center}
+  .ovja{font-size:20px;font-weight:700;line-height:1.5}
+  .ovname{font-size:34px;font-weight:900;margin:14px 0 4px;line-height:1.3;color:var(--red)}
+  .ovsub{font-size:15px;color:var(--muted)}
+  .ovq{font-size:17px;margin-top:14px;line-height:1.5}
+  .ovbtn{display:flex;gap:10px;justify-content:center;margin-top:18px}
+  .ovbtn button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 16px;font:inherit;font-weight:700}
 </style>
 </head>
 <body>
@@ -116,23 +135,25 @@
 <header>
   <div class="sun"></div>
   <div>
-    <h1>Tokyo Trip · 16–23 ธ.ค. 2569</h1>
-    <div class="sub">คู่รัก 2 คน · Hotel Sardonyx Ueno 7 คืน · ไป XJ602 ดอนเมือง → นาริตะ T2 · กลับ XJ603 23 ธ.ค. · 🎂 วันเกิดแฟน 18 ธ.ค.</div>
+    <h1 id="h1">Tokyo Trip · 16–23 ธ.ค. 2569</h1>
+    <div class="sub" id="sub">คู่รัก 2 คน · Hotel Sardonyx Ueno 7 คืน · ไป XJ602 ดอนเมือง → นาริตะ T2 · กลับ XJ603 23 ธ.ค. · 🎂 วันเกิดแฟน 18 ธ.ค.</div>
   </div>
 </header>
 
-<div class="stats">
+<div class="stats th-only">
   <div class="stat"><div class="k">งบรวม 2 คน</div><div class="v">฿156,427</div></div>
-  <div class="stat"><div class="k">จ่ายแล้ว</div><div class="v">฿73,343</div></div>
+  <div class="stat"><div class="k">จ่ายแล้ว</div><div class="v">฿80,276</div></div>
   <div class="stat"><div class="k">JR Pass</div><div class="v">20–22 ธ.ค.</div></div>
 </div>
 
-<div class="howto">🗺️ <b>วิธีใช้ตอนเที่ยว:</b> กดเลือกวันด้านล่าง แต่ละวันมีรายการ "จุดหมายวันนี้" เรียงตามลำดับ กด <b>นำทาง</b> แล้ว Google Maps จะเปิดเส้นทางจากตำแหน่งที่ยืนอยู่ไปจุดนั้นทันที (รถไฟ/เดิน) กด <b>📍</b> เพื่อดูหมุดอย่างเดียว · ช่วงทริปหน้านี้จะเปิดวันปัจจุบันให้อัตโนมัติ</div>
+<div class="howto" id="howto">🗺️ <b>วิธีใช้ตอนเที่ยว:</b> กดเลือกวันด้านล่าง แต่ละวันมีรายการ "จุดหมายวันนี้" เรียงตามลำดับ กด <b>นำทาง</b> แล้ว Google Maps จะเปิดเส้นทางจากตำแหน่งที่ยืนอยู่ไปจุดนั้นทันที (รถไฟ/เดิน) กด <b>📍</b> เพื่อดูหมุดอย่างเดียว · ช่วงทริปหน้านี้จะเปิดวันปัจจุบันให้อัตโนมัติ</div>
 
+<div class="langbar"><button data-l="th">ไทย</button><button data-l="en">EN</button><button data-l="ja">日本語</button></div>
+<div class="sec ask-card notth" id="askGeneral"></div>
 <nav class="daynav" id="daynav"></nav>
 <div id="timeline"></div>
 
-<div class="sec" id="booking">
+<div class="sec th-only" id="booking">
   <h2>📋 สถานะการจอง</h2>
   <table class="g">
     <tr><th>รายการ</th><th class="n">ยอด</th><th>สถานะ</th></tr>
@@ -141,35 +162,35 @@
     <tr><td>ตั๋ว Disneyland 18 ธ.ค.</td><td class="n">฿4,464</td><td><span class="st done">จองแล้ว</span></td></tr>
     <tr><td>ตั๋ว DisneySea 22 ธ.ค.</td><td class="n">฿4,698</td><td><span class="st done">จองแล้ว</span></td></tr>
     <tr><td>ประกัน Sompo Standard Plus 2 คน</td><td class="n">฿1,431</td><td><span class="st done">ซื้อแล้ว</span></td></tr>
-    <tr><td>JR TOKYO Wide Pass (เริ่มใช้ 20 ธ.ค.)</td><td class="n">¥32,000</td><td><span class="st soon">พ.ย.</span></td></tr>
-    <tr><td>ที่นั่ง Fuji Excursion (20 ธ.ค.)</td><td class="n">รวมใน Pass</td><td><span class="st soon">20 พ.ย. 08:00</span></td></tr>
+    <tr><td>JR TOKYO Wide Pass 2 ใบ (eki-net · เริ่มใช้ 20 ธ.ค.)</td><td class="n">~฿6,933</td><td><span class="st done">ซื้อแล้ว</span></td></tr>
+    <tr><td>ที่นั่ง Fuji Excursion (20 ธ.ค.)</td><td class="n">รวมใน Pass</td><td><span class="st done">จองแล้ว</span></td></tr>
     <tr><td>ที่นั่ง Shinkansen GALA (21 ธ.ค.)</td><td class="n">รวมใน Pass</td><td><span class="st soon">21 พ.ย. 08:00</span></td></tr>
     <tr><td>Shibuya Sky รอบ 16:00 วันที่ 17</td><td class="n">¥5,000</td><td><span class="st soon">พ.ย.</span></td></tr>
     <tr><td>Blue Bayou (มื้อวันเกิด)</td><td class="n">¥12,000–14,000</td><td><span class="st soon">ล่วงหน้า 1 เดือน</span></td></tr>
     <tr><td>teamLab Borderless (ถ้าไป)</td><td class="n">¥8,400</td><td><span class="st soon">พ.ย.</span></td></tr>
     <tr><td>Skyliner e-ticket ไป-กลับ</td><td class="n">¥9,000</td><td><span class="st soon">ก่อนบิน</span></td></tr>
     <tr><td>eSIM · Visit Japan Web · แลกเยน · Suica</td><td class="n">—</td><td><span class="st site">ธ.ค.</span></td></tr>
-    <tr class="tot"><td>จ่ายไปแล้ว</td><td class="n">฿73,343</td><td></td></tr>
+    <tr class="tot"><td>จ่ายไปแล้ว</td><td class="n">฿80,276</td><td></td></tr>
   </table>
 </div>
 
-<div class="sec">
+<div class="sec th-only">
   <h2>🚄 ขบวนรถไฟที่ต้องจอง</h2>
   <table class="g">
     <tr><th>วัน</th><th>ขบวน</th><th>ขึ้น → ลง</th></tr>
-    <tr><td>20 ไป</td><td>Fuji Excursion No.3</td><td>Shinjuku 7:30 → Shimoyoshida 9:13</td></tr>
-    <tr><td>20 กลับ</td><td>Fuji Excursion No.48</td><td>Kawaguchiko ~17:40 → Shinjuku ~19:45</td></tr>
+    <tr><td>20 ไป ✅</td><td>Fuji Excursion 3<br><small>Car 2 · 2-C, 2-D</small></td><td>Shinjuku 07:30 → Shimoyoshida 09:11</td></tr>
+    <tr><td>20 กลับ ✅</td><td>Fuji Excursion 48<br><small>Car 1 · 7-A, 7-B</small></td><td>Kawaguchiko 17:41 → Shinjuku 19:40</td></tr>
     <tr><td>21 ไป</td><td>Tanigawa 471</td><td>Ueno 7:42 → GALA Yuzawa 9:03</td></tr>
     <tr><td>21 กลับ</td><td>Tanigawa 412</td><td>GALA Yuzawa 15:56 → Ueno 17:14</td></tr>
   </table>
-  <div class="note">สำรอง: Fuji No.7 (Shinjuku 8:30) · Fuji No.44 (Kawaguchiko ~16:48) · Tanigawa 403 (Ueno 8:09) · จองเปิด 10:00 ญี่ปุ่น = 08:00 ไทย ล่วงหน้า 1 เดือนพอดี · ยึดเวลาที่เว็บจองแสดงจริง</div>
+  <div class="note">ตั๋วที่นั่งตัวจริงต้องออกที่ตู้หรือเคาน์เตอร์ก่อนขึ้น ออกพร้อมรับ Pass ที่นาริตะวันที่ 16 ได้เลย · สำรอง GALA: Tanigawa 403 (Ueno 8:09) · จองเปิด 10:00 ญี่ปุ่น = 08:00 ไทย ล่วงหน้า 1 เดือนพอดี · ยึดเวลาที่เว็บจองแสดงจริง</div>
   <ul class="clean">
     <li><b>Skyliner</b> e-ticket ¥4,500/คน ไป-กลับ · ใช้สถานี <b>Narita Airport Terminal 2·3</b> ทั้งขาไปและขากลับ</li>
     <li><b>Suica</b> ใน Apple Wallet เติม ~¥6,000 ใช้วันในเมือง · วันที่ 22 ไป Maihama ด้วย JR Pass</li>
   </ul>
 </div>
 
-<div class="sec">
+<div class="sec th-only">
   <h2>🧾 Tax-free ระบบใหม่</h2>
   <ol class="clean">
     <li>ที่ร้าน: โชว์พาสปอร์ต แล้ว <b>จ่ายเต็มราคา</b> เก็บใบเสร็จทุกใบ</li>
@@ -180,7 +201,7 @@
   <div class="note">Duty Free หลังผ่าน ตม. ยังซื้อแบบไม่เสียภาษีได้เลย</div>
 </div>
 
-<div class="sec">
+<div class="sec th-only">
   <h2>🧣 อากาศ & ของต้องรู้</h2>
   <table class="g">
     <tr><th>ที่</th><th>กลางวัน</th><th>กลางคืน</th></tr>
@@ -194,7 +215,7 @@
   </div>
 </div>
 
-<div class="sec">
+<div class="sec th-only">
   <h2>🔄 แผนสำรอง</h2>
   <table class="g">
     <tr><td>20 ฟ้าปิด ฟูจิไม่โผล่</td><td>สลับกับวันที่ 21 (GALA) ได้ อยู่ใน JR Pass ทั้งคู่ · เช็ก tenki.jp ตอน 06:00</td></tr>
@@ -204,7 +225,7 @@
   </table>
 </div>
 
-<div class="sec">
+<div class="sec th-only">
   <h2>🗣️ ประโยคที่ใช้บ่อย</h2>
   <table class="g">
     <tr><td>ขอโทษ / เรียกพนักงาน</td><td class="jp">すみません</td><td>สุมิมาเซ็ง</td></tr>
@@ -217,246 +238,328 @@
   </table>
 </div>
 
-<footer>เวลาและราคาเป็นค่าประมาณ ณ พ.ย. 2569 · ปุ่มแผนที่เปิดด้วย Google Maps</footer>
+<div class="sec notth" id="trainIntl"></div>
+<footer id="foot">เวลาและราคาเป็นค่าประมาณ ณ พ.ย. 2569 · ปุ่มแผนที่เปิดด้วย Google Maps</footer>
 </div>
+<div class="ov" id="ov" onclick="if(event.target===this)closeAsk()"><div class="ovc">
+  <div class="ovja" id="ovPhrase"></div>
+  <div class="ovname" id="ovName"></div>
+  <div class="ovsub" id="ovSub"></div>
+  <div class="ovq" id="ovQ"></div>
+  <div class="ovbtn"><a class="go" id="ovGo" target="_blank" rel="noopener">Google Maps</a><button onclick="closeAsk()" id="ovClose">✕</button></div>
+</div></div>
 <button class="totop" onclick="window.scrollTo({top:0})">↑ บนสุด</button>
 
 <script>
-// ---------- map helpers ----------
+// ---------- helpers ----------
 const Q = s => encodeURIComponent(s);
-const GO = (q,m) => `https://www.google.com/maps/dir/?api=1&destination=${Q(q)}&travelmode=${m||'transit'}`;
+const GO = q => `https://www.google.com/maps/dir/?api=1&destination=${Q(q)}&travelmode=transit`;
 const PIN = q => `https://www.google.com/maps/search/?api=1&query=${Q(q)}`;
-// place: [label, query, mode('transit'|'walking'), note]
-const P = {
-  hotel:["Hotel Sardonyx Ueno","Hotel Sardonyx Ueno Tokyo","walking"],
-  nrtT2:["สถานี Narita Airport Terminal 2·3","Narita Airport Terminal 2-3 Station","walking"],
-  keiseiUeno:["สถานี Keisei-Ueno","Keisei Ueno Station","walking"],
-  ameyoko:["ตลาด Ameyoko","Ameyoko Shopping Street Ueno","walking"],
-  minatoya:["Minatoya (ข้าวหน้าปลาดิบ)","Minatoya Shokuhin Ameyoko","walking"],
-  uenoPark:["สวน Ueno","Ueno Park","walking"],
-  shinobazu:["สระ Shinobazu","Shinobazu Pond","walking"],
-  toshogu:["ศาลเจ้า Ueno Toshogu","Ueno Toshogu Shrine","walking"],
-  donkiUeno:["Don Quijote Ueno","Don Quijote Ueno Ekimae","walking"],
-  isomaru:["Isomaru Suisan Ueno","Isomaru Suisan Ueno","walking"],
-  ichiran:["Ichiran Ueno","Ichiran Ueno","walking"],
-  sensoji:["วัด Senso-ji (Kaminarimon)","Kaminarimon Gate Asakusa","transit"],
-  kagetsudo:["Asakusa Kagetsudo (เมลอนปัง)","Asakusa Kagetsudo Main Store","walking"],
-  sumida:["ริมแม่น้ำ Sumida (วิว Skytree)","Sumida Park Asakusa","walking"],
-  daikokuya:["Daikokuya Tempura","Daikokuya Tempura Asakusa","walking"],
-  takeshita:["Takeshita Street","Takeshita Street Harajuku","transit"],
-  marion:["Marion Crepes","Marion Crepes Harajuku Takeshita","walking"],
-  shibuyaSky:["Shibuya Sky","Shibuya Sky","transit"],
-  crossing:["Shibuya Crossing · ฮาจิโกะ","Hachiko Memorial Statue Shibuya","walking"],
-  uobei:["Uobei Shibuya Dogenzaka","Uobei Shibuya Dogenzaka","walking"],
-  aonodokutsu:["อุโมงค์ไฟ Ao no Dokutsu","Shibuya Ao no Dokutsu illumination Yoyogi Park","walking"],
-  maihama:["สถานี Maihama","Maihama Station","transit"],
-  tdl:["Tokyo Disneyland","Tokyo Disneyland","walking"],
-  blueBayou:["Blue Bayou Restaurant","Blue Bayou Restaurant Tokyo Disneyland","walking"],
-  tsukiji:["ตลาด Tsukiji Outer Market","Tsukiji Outer Market","transit"],
-  hongwanji:["วัด Tsukiji Hongwanji","Tsukiji Hongwanji","walking"],
-  uniqloGinza:["Uniqlo Ginza","UNIQLO Ginza","walking"],
-  mujiGinza:["Muji Ginza","MUJI Ginza","walking"],
-  itoya:["Ginza Itoya (เครื่องเขียน)","Ginza Itoya","walking"],
-  ginzaSix:["Ginza Six","GINZA SIX","walking"],
-  marunouchi:["ไฟ Marunouchi Naka-dori","Marunouchi Naka-dori Avenue","walking"],
-  tokyoSt:["สถานี Tokyo","Tokyo Station","walking"],
-  takeya:["Takeya (ตึกม่วง)","Takeya 1 Ueno","walking"],
-  matsuzakaya:["Matsuzakaya Ueno","Matsuzakaya Ueno","walking"],
-  daitoryo:["Daitoryo อิซากายะ","Daitoryo Ueno Ameyoko","walking"],
-  torikizoku:["Torikizoku Ueno","Torikizoku Ueno","walking"],
-  teamlab:["teamLab Borderless","teamLab Borderless Azabudai Hills","transit"],
-  keyakizaka:["ไฟ Roppongi Keyakizaka","Roppongi Hills Keyakizaka Street","walking"],
-  shinjuku:["สถานี Shinjuku (ชานชาลา JR)","JR Shinjuku Station","transit"],
-  shimoyoshida:["สถานี Shimoyoshida","Shimoyoshida Station","walking"],
-  chureito:["เจดีย์ Chureito","Chureito Pagoda","walking"],
-  honcho:["Honcho-dori (ถนนวิวฟูจิ)","Honcho Street Fujiyoshida","walking"],
-  kawaguchikoSt:["สถานี Kawaguchiko","Kawaguchiko Station","transit"],
-  houtou:["Houtou Fudou (โฮโตะ)","Houtou Fudou Kawaguchiko Ekimae","walking"],
-  oishi:["Oishi Park","Oishi Park Kawaguchiko","transit"],
-  ropeway:["Mt. Fuji Panoramic Ropeway","Mt. Fuji Panoramic Ropeway","transit"],
-  donkiShinjuku:["Don Quijote Shinjuku Kabukicho","Don Quijote Shinjuku Kabukicho","walking"],
-  onyasai:["Onyasai Ueno (ชาบู)","Onyasai Ueno","walking"],
-  uenoSt:["สถานี Ueno (Shinkansen)","JR Ueno Station","walking"],
-  gala:["สถานี GALA Yuzawa","GALA Yuzawa Station","walking"],
-  spagala:["SPA GALA no Yu","SPA GALA no Yu","walking"],
-  resortGw:["Resort Gateway (โมโนเรล)","Resort Gateway Station","walking"],
-  tds:["Tokyo DisneySea","Tokyo DisneySea","walking"],
-  canaletto:["Ristorante di Canaletto","Ristorante di Canaletto Tokyo DisneySea","walking"],
-  nrtAirport:["สนามบินนาริตะ Terminal 2","Narita International Airport Terminal 2","transit"]
-};
-const L = (...keys) => keys; // list of place keys for a row
+let LANG = 'th';
+try { const s = localStorage.getItem('tripLang'); if (s) LANG = s; } catch(e){}
 
+// place: th, en, ja, query
+const P = {
+  hotel:["Hotel Sardonyx Ueno","Hotel Sardonyx Ueno","ホテルサードニクス上野","Hotel Sardonyx Ueno Tokyo"],
+  nrtT2:["สถานี Narita Airport Terminal 2·3","Narita Airport Terminal 2·3 Station","空港第2ビル駅","Narita Airport Terminal 2-3 Station"],
+  keiseiUeno:["สถานี Keisei-Ueno","Keisei-Ueno Station","京成上野駅","Keisei Ueno Station"],
+  ameyoko:["ตลาด Ameyoko","Ameyoko Market","アメ横商店街","Ameyoko Shopping Street Ueno"],
+  minatoya:["Minatoya (ข้าวหน้าปลาดิบ)","Minatoya (seafood bowl)","みなとや食品","Minatoya Shokuhin Ameyoko"],
+  uenoPark:["สวน Ueno","Ueno Park","上野恩賜公園","Ueno Park"],
+  shinobazu:["สระ Shinobazu","Shinobazu Pond","不忍池","Shinobazu Pond"],
+  toshogu:["ศาลเจ้า Ueno Toshogu","Ueno Toshogu Shrine","上野東照宮","Ueno Toshogu Shrine"],
+  donkiUeno:["Don Quijote Ueno","Don Quijote Ueno","ドン・キホーテ 上野駅前店","Don Quijote Ueno Ekimae"],
+  isomaru:["Isomaru Suisan Ueno","Isomaru Suisan Ueno","磯丸水産 上野店","Isomaru Suisan Ueno"],
+  ichiran:["Ichiran Ueno","Ichiran Ramen Ueno","一蘭 上野","Ichiran Ueno"],
+  sensoji:["วัด Senso-ji (Kaminarimon)","Senso-ji (Kaminarimon Gate)","浅草寺 雷門","Kaminarimon Gate Asakusa"],
+  kagetsudo:["Asakusa Kagetsudo (เมลอนปัง)","Asakusa Kagetsudo","浅草花月堂 本店","Asakusa Kagetsudo Main Store"],
+  sumida:["ริมแม่น้ำ Sumida (วิว Skytree)","Sumida Park","隅田公園","Sumida Park Asakusa"],
+  daikokuya:["Daikokuya Tempura","Daikokuya Tempura","大黒家天麩羅","Daikokuya Tempura Asakusa"],
+  takeshita:["Takeshita Street","Takeshita Street","竹下通り","Takeshita Street Harajuku"],
+  marion:["Marion Crepes","Marion Crepes","マリオンクレープ 竹下通り","Marion Crepes Harajuku Takeshita"],
+  shibuyaSky:["Shibuya Sky","SHIBUYA SKY","渋谷スカイ（渋谷スクランブルスクエア）","Shibuya Sky"],
+  crossing:["Shibuya Crossing · ฮาจิโกะ","Shibuya Crossing · Hachiko","渋谷スクランブル交差点・ハチ公像","Hachiko Memorial Statue Shibuya"],
+  uobei:["Uobei Shibuya Dogenzaka","Uobei Shibuya Dogenzaka","魚べい 渋谷道玄坂店","Uobei Shibuya Dogenzaka"],
+  aonodokutsu:["อุโมงค์ไฟ Ao no Dokutsu","Ao no Dokutsu Illumination","青の洞窟 SHIBUYA","Shibuya Ao no Dokutsu illumination Yoyogi Park"],
+  maihama:["สถานี Maihama","Maihama Station","舞浜駅","Maihama Station"],
+  tdl:["Tokyo Disneyland","Tokyo Disneyland","東京ディズニーランド","Tokyo Disneyland"],
+  blueBayou:["Blue Bayou Restaurant","Blue Bayou Restaurant","ブルーバイユー・レストラン","Blue Bayou Restaurant Tokyo Disneyland"],
+  tsukiji:["ตลาด Tsukiji Outer Market","Tsukiji Outer Market","築地場外市場","Tsukiji Outer Market"],
+  hongwanji:["วัด Tsukiji Hongwanji","Tsukiji Hongwanji","築地本願寺","Tsukiji Hongwanji"],
+  uniqloGinza:["Uniqlo Ginza","UNIQLO Ginza","ユニクロ 銀座店","UNIQLO Ginza"],
+  mujiGinza:["Muji Ginza","MUJI Ginza","無印良品 銀座","MUJI Ginza"],
+  itoya:["Ginza Itoya (เครื่องเขียน)","Ginza Itoya","銀座 伊東屋","Ginza Itoya"],
+  ginzaSix:["Ginza Six","GINZA SIX","GINZA SIX","GINZA SIX"],
+  marunouchi:["ไฟ Marunouchi Naka-dori","Marunouchi Naka-dori","丸の内仲通り","Marunouchi Naka-dori Avenue"],
+  takeya:["Takeya (ตึกม่วง)","Takeya Ueno","多慶屋","Takeya 1 Ueno"],
+  matsuzakaya:["Matsuzakaya Ueno","Matsuzakaya Ueno","松坂屋上野店","Matsuzakaya Ueno"],
+  daitoryo:["Daitoryo อิซากายะ","Daitoryo Izakaya","大統領（上野）","Daitoryo Ueno Ameyoko"],
+  torikizoku:["Torikizoku Ueno","Torikizoku Ueno","鳥貴族 上野","Torikizoku Ueno"],
+  teamlab:["teamLab Borderless","teamLab Borderless","チームラボボーダレス（麻布台ヒルズ）","teamLab Borderless Azabudai Hills"],
+  keyakizaka:["ไฟ Roppongi Keyakizaka","Roppongi Keyakizaka","六本木けやき坂","Roppongi Hills Keyakizaka Street"],
+  shinjuku:["สถานี Shinjuku (JR)","JR Shinjuku Station","JR新宿駅","JR Shinjuku Station"],
+  shimoyoshida:["สถานี Shimoyoshida","Shimoyoshida Station","下吉田駅","Shimoyoshida Station"],
+  chureito:["เจดีย์ Chureito","Chureito Pagoda","忠霊塔（新倉山浅間公園）","Chureito Pagoda"],
+  honcho:["Honcho-dori (ถนนวิวฟูจิ)","Honcho-dori Street","本町通り（富士吉田）","Honcho Street Fujiyoshida"],
+  kawaguchikoSt:["สถานี Kawaguchiko","Kawaguchiko Station","河口湖駅","Kawaguchiko Station"],
+  houtou:["Houtou Fudou (โฮโตะ)","Houtou Fudou","ほうとう不動","Houtou Fudou Kawaguchiko Ekimae"],
+  oishi:["Oishi Park","Oishi Park","大石公園","Oishi Park Kawaguchiko"],
+  ropeway:["Mt. Fuji Panoramic Ropeway","Mt. Fuji Panoramic Ropeway","富士山パノラマロープウェイ","Mt. Fuji Panoramic Ropeway"],
+  donkiShinjuku:["Don Quijote Shinjuku Kabukicho","Don Quijote Shinjuku Kabukicho","ドン・キホーテ 新宿歌舞伎町店","Don Quijote Shinjuku Kabukicho"],
+  onyasai:["Onyasai Ueno (ชาบู)","Onyasai Ueno (shabu-shabu)","温野菜 上野","Onyasai Ueno"],
+  uenoSt:["สถานี Ueno (Shinkansen)","JR Ueno Station (Shinkansen)","JR上野駅（新幹線）","JR Ueno Station"],
+  gala:["สถานี GALA Yuzawa","GALA Yuzawa Station","ガーラ湯沢駅","GALA Yuzawa Station"],
+  spagala:["SPA GALA no Yu","SPA GALA no Yu","SPA ガーラの湯","SPA GALA no Yu"],
+  resortGw:["Resort Gateway (โมโนเรล)","Resort Gateway Station","リゾートゲートウェイ・ステーション","Resort Gateway Station"],
+  tds:["Tokyo DisneySea","Tokyo DisneySea","東京ディズニーシー","Tokyo DisneySea"],
+  canaletto:["Ristorante di Canaletto","Ristorante di Canaletto","リストランテ・ディ・カナレット","Ristorante di Canaletto Tokyo DisneySea"],
+  nrtAirport:["สนามบินนาริตะ Terminal 2","Narita Airport Terminal 2","成田空港 第2ターミナル","Narita International Airport Terminal 2"]
+};
+const LI = {th:0,en:1,ja:2};
+const pname = k => P[k][LI[LANG]];
+
+const UI = {
+  th:{h1:"Tokyo Trip · 16–23 ธ.ค. 2569",
+      sub:"คู่รัก 2 คน · Hotel Sardonyx Ueno 7 คืน · ไป XJ602 ดอนเมือง → นาริตะ T2 · กลับ XJ603 23 ธ.ค. · 🎂 วันเกิดแฟน 18 ธ.ค.",
+      howto:"🗺️ <b>วิธีใช้ตอนเที่ยว:</b> กดเลือกวัน แต่ละวันมี \"จุดหมายวันนี้\" เรียงตามลำดับ กด <b>นำทาง</b> เปิด Google Maps นำทางจากตำแหน่งปัจจุบัน · กด <b>📍</b> ดูหมุด · กด <b>🙋</b> ขึ้นจอใหญ่ภาษาญี่ปุ่นไว้ยื่นให้คนในพื้นที่ช่วยบอกทาง · เปลี่ยนภาษาเป็น EN/日本語 ได้ที่ปุ่มขวาบน",
+      day:"วันที่", dec:"ธ.ค.", today:"📍 วันนี้", stops:"🗺️ จุดหมายวันนี้ (เรียงตามลำดับ)", go:"นำทาง", more:"ตารางเวลา & คำแนะนำ", foodH:"🍽️ ร้านแนะนำ", foodGo:"🧭 ไป",
+      w:["พุธ","พฤหัส","ศุกร์","เสาร์","อาทิตย์","จันทร์","อังคาร","พุธ"], lv:["","🟢 เบา","🟡 ปานกลาง","🔴 หนัก"], foot:"เวลาและราคาเป็นค่าประมาณ ณ พ.ย. 2569 · ปุ่มแผนที่เปิดด้วย Google Maps", top:"↑ บนสุด"},
+  en:{h1:"Tokyo Trip · Dec 16–23, 2026",
+      sub:"2 travellers from Thailand · Staying at Hotel Sardonyx Ueno · Flights XJ602 / XJ603 (Narita T2)",
+      howto:"🗺️ This is our travel plan. Tap <b>🙋</b> next to a place to show a large card in Japanese, or <b>Directions</b> to open Google Maps.",
+      day:"Day", dec:"Dec", today:"📍 Today", stops:"🗺️ Places today (in order)", go:"Directions", more:"Schedule", foodH:"", foodGo:"",
+      w:["Wed","Thu","Fri","Sat","Sun","Mon","Tue","Wed"], lv:["","🟢 Easy","🟡 Moderate","🔴 Busy"], foot:"Times are approximate · Map buttons open Google Maps", top:"↑ Top"},
+  ja:{h1:"東京旅行 · 2026年12月16日〜23日",
+      sub:"タイからの旅行者2名 · 宿泊：ホテルサードニクス上野 · 航空便 XJ602 / XJ603（成田 第2ターミナル）",
+      howto:"🗺️ 私たちの旅行プランです。行き先の横の <b>🙋</b> を押すと日本語の大きな案内が表示されます。道を教えていただけると助かります。",
+      day:"", dec:"", today:"📍 今日", stops:"🗺️ 今日の行き先（順番）", go:"経路", more:"スケジュール", foodH:"", foodGo:"",
+      w:["水","木","金","土","日","月","火","水"], lv:["","🟢 ゆったり","🟡 普通","🔴 忙しい"], foot:"時間は目安です · 地図ボタンはGoogleマップで開きます", top:"↑ 上へ"}
+};
+const ASK = {
+  phrase:"すみません。ここに行きたいです。",
+  q:"道を教えていただけますか？<br><span style='font-size:14px;color:#6b7280'>Excuse me, we would like to go here. Could you show us the way?</span>"
+};
+
+// rows: [time, th, en, ja, [placeKeys]]
 const DAYS = [
-{id:"d16",d:16,w:"พุธ",cls:"",title:"✈️ ถึงโตเกียว · วันเบาๆ ย่าน Ueno",yen:"¥10,000",lv:1,
+{id:"d16",d:16,cls:"",lv:1,yen:"¥10,000",
+ t:["✈️ ถึงโตเกียว · วันเบาๆ ย่าน Ueno","✈️ Arrive in Tokyo · easy day in Ueno","✈️ 東京到着・上野でのんびり"],
  chips:[["chip","Skyliner"],["chip warn","บินคืน แทบไม่ได้นอน"]],
  stops:["nrtT2","keiseiUeno","hotel","ameyoko","uenoPark","donkiUeno"],
  intro:"บินคืนนอนบนเครื่องได้ราว 4–5 ชม. วันนี้จัดเบาที่สุด เดินแค่รอบโรงแรม และมีเวลางีบ",
- boxes:[["alert","⏰ เช็กเวลาเครื่องลงในตั๋ว","ตารางด้านล่างคิดว่าถึงนาริตะ ~09:00 ถ้าตั๋วระบุ ~10:45 ให้เลื่อนทุกช่วงออกไป ~1.5 ชม. แล้วตัดเดินสวน Ueno ออก"]],
+ boxes:[["alert","⏰ เช็กเวลาเครื่องลงในตั๋ว","ตารางคิดว่าถึงนาริตะ ~09:00 ถ้าตั๋วระบุ ~10:45 ให้เลื่อนทุกช่วงออกไป ~1.5 ชม. แล้วตัดเดินสวน Ueno ออก"]],
  rows:[
-  ["15 ธ.ค. ค่ำ","ถึง <b>ดอนเมือง Terminal 1</b> ก่อนบิน 3 ชม. · XJ602<span class='h'>💡 ลงทะเบียน Visit Japan Web เซฟรูป QR ไว้ในมือถือ</span>",[]],
-  ["กลางคืน","✈️ ออกเดินทาง · นอนเลย<span class='h'>💡 หมอนรองคอ + ถือโค้ท/Ultra Light Down ขึ้นเครื่องใช้แทนผ้าห่ม</span>",[]],
-  ["~09:00","ถึงนาริตะ <b>Terminal 2</b> · ผ่าน ตม. + ศุลกากรด้วย QR · ใส่โค้ทก่อนออกจากอาคาร",[]],
-  ["09:45–10:30","ชั้น B1: เคาน์เตอร์ Keisei แลกตั๋ว Skyliner + แลก JR Pass ที่ JR East Travel Service Center (ถ้าซื้อจากเอเจนซี่)<span class='h'>💡 เปิด eSIM · เติม Suica ใน Apple Wallet</span>",L("nrtT2")],
-  ["10:40–11:25","🚄 Skyliner → Keisei-Ueno (41 นาที)",L("keiseiUeno")],
-  ["11:30–12:00","เดินไปโรงแรม ฝากกระเป๋า",L("hotel")],
-  ["12:00–13:00","🍣 กลางวันในตลาด Ameyoko",L("ameyoko","minatoya")],
-  ["13:00–14:30","🌳 สวน Ueno · สระ Shinobazu · ศาลเจ้า Toshogu",L("uenoPark","shinobazu","toshogu")],
-  ["15:00–17:00","🛏️ เช็กอิน อาบน้ำ <b>งีบ 1.5–2 ชม.</b> · ซักชุดบนเครื่องได้ถ้าไหว",L("hotel")],
-  ["17:30–19:30","🍜 มื้อเย็น + Ameyoko ตอนกลางคืน",L("isomaru","ichiran")],
-  ["19:30–20:30","🛒 Don Quijote: Kairo 10–15 แผ่น ลิปมัน",L("donkiUeno")],
-  ["21:00","นอน",L("hotel")]],
+  ["15 ธ.ค.","ถึง <b>ดอนเมือง Terminal 1</b> ก่อนบิน 3 ชม. · XJ602<span class='h'>💡 ลงทะเบียน Visit Japan Web เซฟรูป QR ไว้</span>","Check in at Don Mueang T1 (XJ602)","ドンムアン空港T1でチェックイン（XJ602）",[]],
+  ["กลางคืน","✈️ ออกเดินทาง · นอนเลย<span class='h'>💡 ถือโค้ท/Ultra Light Down ขึ้นเครื่องใช้แทนผ้าห่ม</span>","Flight departs · sleep on board","出発・機内で睡眠",[]],
+  ["~09:00","ถึงนาริตะ <b>Terminal 2</b> · ผ่าน ตม. + ศุลกากรด้วย QR · ใส่โค้ทก่อนออกจากอาคาร","Arrive at Narita Terminal 2 · immigration & customs","成田空港第2ターミナル到着・入国審査と税関",[]],
+  ["09:45–10:30","ชั้น B1: แลกตั๋ว Skyliner ที่เคาน์เตอร์ Keisei · รับ JR Pass + ออกตั๋วที่นั่ง Fuji Excursion ที่ตู้/เคาน์เตอร์ JR<span class='h'>💡 เปิด eSIM · เติม Suica ใน Apple Wallet</span>","B1: Skyliner tickets (Keisei) · pick up JR Pass & seat tickets (JR East)","B1：京成カウンターでスカイライナー券・JR東日本でJRパスと指定席券を受取",["nrtT2"]],
+  ["10:40–11:25","🚄 Skyliner → Keisei-Ueno (41 นาที)","Skyliner → Keisei-Ueno (41 min)","スカイライナーで京成上野へ（41分）",["keiseiUeno"]],
+  ["11:30–12:00","เดินไปโรงแรม ฝากกระเป๋า","Walk to hotel, leave luggage","ホテルへ徒歩・荷物を預ける",["hotel"]],
+  ["12:00–13:00","🍣 กลางวันในตลาด Ameyoko","Lunch at Ameyoko","アメ横で昼食",["ameyoko","minatoya"]],
+  ["13:00–14:30","🌳 สวน Ueno · สระ Shinobazu · ศาลเจ้า Toshogu","Ueno Park · Shinobazu Pond · Toshogu Shrine","上野公園・不忍池・上野東照宮",["uenoPark","shinobazu","toshogu"]],
+  ["15:00–17:00","🛏️ เช็กอิน อาบน้ำ <b>งีบ 1.5–2 ชม.</b> · ซักชุดบนเครื่องได้ถ้าไหว","Check in · rest","チェックイン・休憩",["hotel"]],
+  ["17:30–19:30","🍜 มื้อเย็น + Ameyoko ตอนกลางคืน","Dinner · Ameyoko at night","夕食・夜のアメ横",["isomaru","ichiran"]],
+  ["19:30–20:30","🛒 Don Quijote: Kairo 10–15 แผ่น ลิปมัน","Shopping at Don Quijote","ドン・キホーテで買い物",["donkiUeno"]],
+  ["21:00","นอน","Sleep","就寝",["hotel"]]],
  food:[["<b>Minatoya</b> ข้าวหน้าปลาดิบ ~¥500–900 ร้านยืนกิน","minatoya"],["<b>Isomaru Suisan</b> ซีฟู้ดปิ้งเอง ~¥3,000/คน","isomaru"],["<b>Ichiran</b> ราเมงที่นั่งแยกช่อง ใบสั่งภาษาไทย","ichiran"]]},
 
-{id:"d17",d:17,w:"พฤหัส",cls:"city",title:"⛩️ Asakusa · Skytree · Harajuku · Shibuya Sky",yen:"¥21,000",lv:2,
+{id:"d17",d:17,cls:"city",lv:2,yen:"¥21,000",
+ t:["⛩️ Asakusa · Skytree · Harajuku · Shibuya Sky","⛩️ Asakusa · Skytree · Harajuku · Shibuya Sky","⛩️ 浅草・スカイツリー・原宿・渋谷スカイ"],
  chips:[["chip warn","Shibuya Sky รอบ 16:00"]],
  stops:["sensoji","sumida","takeshita","shibuyaSky","crossing","hotel"],
  intro:"เรียงจากตะวันออกไปตะวันตก ไม่ย้อนกลับ จบด้วยพระอาทิตย์ตกที่ Shibuya",
  rows:[
-  ["07:30–08:15","🍙 มื้อเช้า konbini ใกล้โรงแรม",[]],
-  ["08:30–08:45","🚇 Ueno → Asakusa · Metro สาย Ginza 3 สถานี",L("sensoji")],
-  ["09:00–11:00","⛩️ ประตู Kaminarimon → ถนน Nakamise → วิหารหลัก<span class='h'>💡 เซียมซี ¥100 · 9 โมงคนน้อย 11 โมงคนล้น</span>",L("sensoji")],
-  ["11:00–11:40","🍡 เมลอนปัง Kagetsudo · ดังโงะ · ไอศกรีมมัทฉะ",L("kagetsudo")],
-  ["11:45–12:15","📸 ริมแม่น้ำ Sumida ถ่าย Skytree",L("sumida")],
-  ["12:30–13:45","🍤 มื้อกลางวัน",L("daikokuya")],
-  ["14:00–14:45","🚇 → Meiji-jingumae (Harajuku) ~25 นาที",L("takeshita")],
-  ["14:45–15:45","🍓 Takeshita Street · เครป Marion",L("takeshita","marion")],
-  ["15:50–16:00","🚃 JR Yamanote → Shibuya 1 สถานี",L("shibuyaSky")],
-  ["16:00–17:30","🌇 <b>Shibuya Sky</b> อาทิตย์ตก ~16:30<span class='w'>⚠️ ดาดฟ้าลมแรงหนาว ห้ามพกร่ม ต้องฝากล็อกเกอร์</span>",L("shibuyaSky")],
-  ["17:40–18:00","🚦 Shibuya Crossing + ฮาจิโกะ",L("crossing")],
-  ["18:00–19:30","🍣 มื้อเย็น · ถ้ามีแรงไปอุโมงค์ไฟ Ao no Dokutsu",L("uobei","aonodokutsu")],
-  ["20:00","🚃 JR Yamanote → Ueno ~30 นาที",L("hotel")]],
+  ["07:30–08:15","🍙 มื้อเช้า konbini ใกล้โรงแรม","Breakfast at a convenience store","コンビニで朝食",[]],
+  ["08:30–08:45","🚇 Ueno → Asakusa · Metro สาย Ginza 3 สถานี","Ueno → Asakusa (Ginza Line, 3 stops)","上野→浅草（銀座線・3駅）",["sensoji"]],
+  ["09:00–11:00","⛩️ ประตู Kaminarimon → ถนน Nakamise → วิหารหลัก<span class='h'>💡 เซียมซี ¥100 · 9 โมงคนน้อย</span>","Kaminarimon → Nakamise Street → Senso-ji","雷門→仲見世通り→浅草寺本堂",["sensoji"]],
+  ["11:00–11:40","🍡 เมลอนปัง Kagetsudo · ดังโงะ · ไอศกรีมมัทฉะ","Melon pan at Kagetsudo · street snacks","花月堂のメロンパン・食べ歩き",["kagetsudo"]],
+  ["11:45–12:15","📸 ริมแม่น้ำ Sumida ถ่าย Skytree","Sumida River: Skytree photo","隅田川沿いでスカイツリーの写真",["sumida"]],
+  ["12:30–13:45","🍤 มื้อกลางวัน","Lunch","昼食",["daikokuya"]],
+  ["14:00–14:45","🚇 → Meiji-jingumae (Harajuku) ~25 นาที","To Meiji-jingumae (Harajuku) ~25 min","明治神宮前（原宿）へ・約25分",["takeshita"]],
+  ["14:45–15:45","🍓 Takeshita Street · เครป Marion","Takeshita Street · crepes","竹下通り・クレープ",["takeshita","marion"]],
+  ["15:50–16:00","🚃 JR Yamanote → Shibuya 1 สถานี","JR Yamanote → Shibuya (1 stop)","JR山手線で渋谷へ（1駅）",["shibuyaSky"]],
+  ["16:00–17:30","🌇 <b>Shibuya Sky</b> อาทิตย์ตก ~16:30<span class='w'>⚠️ ห้ามพกร่ม ต้องฝากล็อกเกอร์</span>","SHIBUYA SKY (sunset ~16:30)","SHIBUYA SKY（日没 約16:30）",["shibuyaSky"]],
+  ["17:40–18:00","🚦 Shibuya Crossing + ฮาจิโกะ","Shibuya Crossing · Hachiko","スクランブル交差点・ハチ公",["crossing"]],
+  ["18:00–19:30","🍣 มื้อเย็น · อุโมงค์ไฟ Ao no Dokutsu","Dinner · Ao no Dokutsu illumination","夕食・青の洞窟",["uobei","aonodokutsu"]],
+  ["20:00","🚃 JR Yamanote → Ueno ~30 นาที","JR Yamanote → Ueno (~30 min)","JR山手線で上野へ（約30分）",["hotel"]]],
  food:[["<b>Daikokuya</b> ข้าวหน้ากุ้งเทมปุระ ~¥2,300/คน","daikokuya"],["<b>Uobei</b> ซูชิสายพาน สั่งผ่านจอ ~¥2,000/คน ⭐","uobei"]]},
 
-{id:"d18",d:18,w:"ศุกร์",cls:"disney",title:"🎂 Tokyo Disneyland · วันเกิด",yen:"¥58,400",lv:3,
+{id:"d18",d:18,cls:"disney",lv:3,yen:"¥58,400",
+ t:["🎂 Tokyo Disneyland · วันเกิด","🎂 Tokyo Disneyland · Birthday","🎂 東京ディズニーランド・誕生日"],
  chips:[["chip ok","ตั๋วซื้อแล้ว"],["chip dis","Premier Access"]],
  stops:["maihama","tdl","blueBayou","hotel"],
  bday:["<b>สติกเกอร์วันเกิดฟรี</b> ที่ Main Street House บอก \"Birthday\"","<b>Blue Bayou</b> จองในแอปล่วงหน้า 1 เดือน บอกว่าวันเกิด","ช่วง <b>Christmas Fantasy</b> ต้นคริสต์มาสยักษ์หน้าปราสาท","Popcorn Bucket ~¥3,000 แต่ละซุ้มรสต่างกัน"],
  rows:[
-  ["06:45","ตื่น · มื้อเช้า konbini",[]],
-  ["07:30–08:10","🚃 Ueno → Tokyo → JR Keiyo → Maihama ~¥410<span class='w'>⚠️ ชานชาลา Keiyo ที่สถานี Tokyo ไกล เดิน ~12 นาที</span>",L("maihama")],
-  ["08:15–08:45","เข้าแถวหน้าประตู",L("tdl")],
-  ["09:00","🏰 Main Street House ขอสติกเกอร์ → ถ่ายรูปปราสาท",L("tdl")],
-  ["09:30–12:00","🎢 Beauty and the Beast · Pooh's Hunny Hunt · Big Thunder<span class='h'>💡 ซื้อ Premier Access ในแอปตั้งแต่เข้าสวน</span>",[]],
-  ["12:00–13:00","🍔 กลางวันเบาๆ · ขาไก่รมควัน · Spring Roll",[]],
-  ["13:00–14:00","🎭 พาเหรดกลางวัน · จองที่ก่อน 45 นาที",[]],
-  ["14:00–17:00","🎡 Fantasyland · Tomorrowland · ช้อป World Bazaar",[]],
-  ["17:00–18:30","🍽️ <b>Birthday Dinner ที่ Blue Bayou</b>",L("blueBayou")],
-  ["18:45–19:15","✨ Electrical Parade Dreamlights",[]],
-  ["19:30–20:30","🎆 การแสดงกลางคืนบนปราสาท",[]],
-  ["21:00–21:45","🚃 กลับโรงแรม (รอ 21:45 จะได้นั่ง)",L("hotel")]]},
+  ["06:45","ตื่น · มื้อเช้า konbini","Breakfast","朝食",[]],
+  ["07:30–08:10","🚃 Ueno → Tokyo → JR Keiyo → Maihama<span class='w'>⚠️ ชานชาลา Keiyo ไกล เดิน ~12 นาที</span>","Ueno → Tokyo → JR Keiyo Line → Maihama","上野→東京→JR京葉線→舞浜",["maihama"]],
+  ["08:15–08:45","เข้าแถวหน้าประตู","Queue at the entrance","入口で開園待ち",["tdl"]],
+  ["09:00","🏰 Main Street House ขอสติกเกอร์ → ถ่ายรูปปราสาท","Birthday sticker → castle photo","バースデーシール→お城で写真",["tdl"]],
+  ["09:30–12:00","🎢 Beauty and the Beast · Pooh's Hunny Hunt · Big Thunder<span class='h'>💡 ซื้อ Premier Access ในแอป</span>","Beauty and the Beast · Pooh's Hunny Hunt · Big Thunder","美女と野獣・プーさんのハニーハント・ビッグサンダー",[]],
+  ["12:00–13:00","🍔 กลางวันเบาๆ","Light lunch","軽い昼食",[]],
+  ["13:00–14:00","🎭 พาเหรดกลางวัน","Daytime parade","昼のパレード",[]],
+  ["14:00–17:00","🎡 Fantasyland · Tomorrowland · ช้อป World Bazaar","Fantasyland · Tomorrowland · World Bazaar","ファンタジーランド・トゥモローランド・ワールドバザール",[]],
+  ["17:00–18:30","🍽️ <b>Birthday Dinner ที่ Blue Bayou</b>","Birthday dinner at Blue Bayou","ブルーバイユーで誕生日ディナー",["blueBayou"]],
+  ["18:45–19:15","✨ Electrical Parade Dreamlights","Electrical Parade Dreamlights","エレクトリカルパレード・ドリームライツ",[]],
+  ["19:30–20:30","🎆 การแสดงกลางคืนบนปราสาท","Night show at the castle","お城の夜のショー",[]],
+  ["21:00–21:45","🚃 กลับโรงแรม","Back to hotel","ホテルへ戻る",["hotel"]]]},
 
-{id:"d19",d:19,w:"เสาร์",cls:"rest",title:"🛍️ วันพัก + ช้อปหลัก: Tsukiji · Ginza · Ueno",yen:"¥25,400",lv:1,
+{id:"d19",d:19,cls:"rest",lv:1,yen:"¥25,400",
+ t:["🛍️ วันพัก + ช้อปหลัก: Tsukiji · Ginza · Ueno","🛍️ Rest day + shopping: Tsukiji · Ginza · Ueno","🛍️ 休息日＋買い物：築地・銀座・上野"],
  chips:[["chip warn","เก็บใบเสร็จ Tax-free"],["chip","🧺 ซักผ้ารอบใหญ่"]],
  stops:["tsukiji","hongwanji","uniqloGinza","marunouchi","hotel","takeya","donkiUeno"],
  intro:"ตื่นสายได้ เป็นวันช้อปหลัก (เช้าวันที่ 23 ไม่มีเวลาช้อป) และวันซักผ้ารอบแรก",
  rows:[
-  ["09:00","ตื่นสาย",[]],
-  ["10:00–10:20","🚇 Ueno → Tsukiji · Metro สาย Hibiya ~15 นาที",L("tsukiji")],
-  ["10:20–12:00","🐟 Tsukiji Outer Market เดินชิม ~¥2,000/คน<span class='h'>💡 ไข่หวาน Tamagoyaki ⭐ · หอยเชลล์ย่าง · วากิวเสียบไม้</span><span class='w'>⚠️ วันเสาร์คนแน่น ร้านปิดบ่าย 2</span>",L("tsukiji")],
-  ["12:00–12:15","⛩️ วัด Tsukiji Hongwanji",L("hongwanji")],
-  ["12:20–16:00","🛍️ Ginza: <b>Uniqlo</b> (ซื้อ Ultra Warm · ถุงเท้าหนา · เลกกิ้ง) · Muji · Itoya · Ginza Six<span class='h'>💡 พกพาสปอร์ต ซื้อเกิน ¥5,000 ขอ Tax-free</span>",L("uniqloGinza","mujiGinza","itoya","ginzaSix")],
-  ["16:15–17:15","🎄 ไฟ Marunouchi Naka-dori ตอนฟ้ามืด",L("marunouchi")],
-  ["17:20–17:40","🚃 Tokyo → Ueno (Yamanote 8 นาที) · <b>เอาของไปเก็บ + ใส่เครื่องซักผ้า</b>",L("hotel")],
-  ["18:00–20:00","🛍️ Takeya · Don Quijote · Ameyoko · Matsuzakaya ชั้นใต้ดิน · กลับไปเก็บผ้า",L("takeya","donkiUeno","matsuzakaya")],
-  ["20:00–21:30","🍢 มื้อเย็น · นอนเร็ว พรุ่งนี้ตื่น 06:20",L("daitoryo","torikizoku")]],
+  ["09:00","ตื่นสาย","Sleep in","ゆっくり起床",[]],
+  ["10:00–10:20","🚇 Ueno → Tsukiji · Metro สาย Hibiya ~15 นาที","Ueno → Tsukiji (Hibiya Line ~15 min)","上野→築地（日比谷線 約15分）",["tsukiji"]],
+  ["10:20–12:00","🐟 Tsukiji Outer Market เดินชิม<span class='h'>💡 ไข่หวาน Tamagoyaki ⭐</span><span class='w'>⚠️ ร้านปิดบ่าย 2</span>","Tsukiji Outer Market food walk","築地場外市場で食べ歩き",["tsukiji"]],
+  ["12:00–12:15","⛩️ วัด Tsukiji Hongwanji","Tsukiji Hongwanji Temple","築地本願寺",["hongwanji"]],
+  ["12:20–16:00","🛍️ Ginza: <b>Uniqlo</b> (Ultra Warm · ถุงเท้าหนา · เลกกิ้ง) · Muji · Itoya · Ginza Six<span class='h'>💡 พกพาสปอร์ต ขอ Tax-free</span>","Ginza shopping: UNIQLO · MUJI · Itoya · GINZA SIX","銀座で買い物：ユニクロ・無印良品・伊東屋・GINZA SIX",["uniqloGinza","mujiGinza","itoya","ginzaSix"]],
+  ["16:15–17:15","🎄 ไฟ Marunouchi Naka-dori","Marunouchi illumination","丸の内仲通りのイルミネーション",["marunouchi"]],
+  ["17:20–17:40","🚃 Tokyo → Ueno · <b>เก็บของ + ใส่เครื่องซักผ้า</b>","Tokyo → Ueno · back to hotel","東京→上野・ホテルへ",["hotel"]],
+  ["18:00–20:00","🛍️ Takeya · Don Quijote · Ameyoko · Matsuzakaya","Shopping: Takeya · Don Quijote · Ameyoko · Matsuzakaya","買い物：多慶屋・ドン・キホーテ・アメ横・松坂屋",["takeya","donkiUeno","matsuzakaya"]],
+  ["20:00–21:30","🍢 มื้อเย็น · นอนเร็ว","Dinner · early night","夕食・早めに就寝",["daitoryo","torikizoku"]]],
  boxes:[["tip","💫 ถ้าอยากไป teamLab","จาก Tsukiji นั่ง Hibiya ไป Kamiyacho → teamLab 12:30–15:00 → ไฟ Keyakizaka แล้วค่อยกลับ Ueno (ข้าม Ginza)<div class='chips'><a class='pin' href='#' data-go='teamlab'>นำทาง teamLab</a><a class='pin' href='#' data-go='keyakizaka'>นำทาง Keyakizaka</a></div>"]],
  food:[["<b>Daitoryo</b> อิซากายะตำนานใน Ameyoko ~¥3,000/คน ⭐","daitoryo"],["<b>Torikizoku</b> ยากิโทริไม้ละ ¥360","torikizoku"]]},
 
-{id:"d20",d:20,w:"อาทิตย์",cls:"fuji",title:"🗻 Day Trip: ฟูจิ · Chureito · Kawaguchiko",yen:"¥18,600",lv:3,
- chips:[["chip jr","JR Pass วันที่ 1"],["chip warn","Fuji Excursion No.3 / No.48"]],
+{id:"d20",d:20,cls:"fuji",lv:3,yen:"¥18,600",
+ t:["🗻 Day Trip: ฟูจิ · Chureito · Kawaguchiko","🗻 Day trip: Mt. Fuji · Chureito · Kawaguchiko","🗻 日帰り：富士山・忠霊塔・河口湖"],
+ chips:[["chip jr","JR Pass วันที่ 1"],["chip ok","Fuji Excursion 3 / 48 จองแล้ว"]],
  stops:["shinjuku","chureito","honcho","kawaguchikoSt","oishi","ropeway","donkiShinjuku","hotel"],
  boxes:[["tip","🗻 ยิ่งเช้ายิ่งชัด","ช่วง 07:00–10:00 โอกาสเห็นฟูจิสูงสุด จึงไป Chureito ก่อน แล้วค่อยไปทะเลสาบตอนบ่าย"]],
  rows:[
-  ["06:20","⏰ ตื่น",[]],
-  ["06:45–07:15","🚃 Ueno → Shinjuku · Yamanote ~25 นาที · ซื้อข้าวปั้นในสถานี",L("shinjuku")],
-  ["07:30","🚄 <b>Fuji Excursion No.3</b> Shinjuku → <b>Shimoyoshida</b> 9:13<span class='w'>⚠️ ลง Shimoyoshida (下吉田) ไม่ใช่ Kawaguchiko</span>",L("shinjuku")],
-  ["09:15–11:00","🏯 <b>Chureito Pagoda</b> บันได 398 ขั้น<span class='w'>⚠️ บันไดอาจมีน้ำแข็ง</span>",L("chureito")],
-  ["11:00–11:40","📸 Honcho-dori ถนนเรโทรมีฟูจิปลายถนน",L("honcho")],
-  ["11:50–12:10","🚃 Shimoyoshida → Kawaguchiko (Fujikyu ~15 นาที)",L("kawaguchikoSt")],
-  ["12:15–13:30","🍲 <b>Houtou Fudou</b> โฮโตะหม้อร้อน ~¥1,300/คน",L("houtou")],
-  ["13:30–13:45","🎫 ซื้อ Sightseeing Bus 1-Day Pass ¥1,500/คน",L("kawaguchikoSt")],
-  ["13:50–15:20","🚌 Red Line → <b>Oishi Park</b> ฟูจิสะท้อนทะเลสาบ",L("oishi")],
-  ["15:50–16:40","🚡 <b>Panoramic Ropeway</b> ¥1,000/คน · ระฆังคู่รัก<span class='w'>⚠️ ปิด ~17:00</span>",L("ropeway")],
-  ["16:45–17:35","♨️ แช่เท้าฟรีที่สถานี Kawaguchiko",L("kawaguchikoSt")],
-  ["~17:40","🚄 <b>Fuji Excursion No.48</b> → Shinjuku ~19:45",[]],
-  ["19:50–20:50","🛍️ Don Quijote Kabukicho / Bic Camera Shinjuku",L("donkiShinjuku")],
-  ["~21:00","🚃 Yamanote → Ueno · มื้อเย็นชาบู",L("onyasai","hotel")]],
+  ["06:20","⏰ ตื่น","Wake up","起床",[]],
+  ["06:45–07:15","🚃 Ueno → Shinjuku · Yamanote ~25 นาที","Ueno → Shinjuku (JR Yamanote ~25 min)","上野→新宿（山手線 約25分）",["shinjuku"]],
+  ["07:30","🚄 <b>Fuji Excursion 3</b> (Car 2 · 2-C, 2-D) → <b>Shimoyoshida</b> 09:11<span class='w'>⚠️ ลง Shimoyoshida ไม่ใช่ Kawaguchiko</span>","Fuji Excursion 3 (Car 2, seats 2-C/2-D) → Shimoyoshida 09:11","富士回遊3号（2号車 2-C・2-D）→下吉田 09:11",["shinjuku"]],
+  ["09:15–11:00","🏯 <b>Chureito Pagoda</b> บันได 398 ขั้น<span class='w'>⚠️ บันไดอาจมีน้ำแข็ง</span>","Chureito Pagoda (398 steps)","忠霊塔（398段の階段）",["chureito"]],
+  ["11:00–11:40","📸 Honcho-dori ถนนวิวฟูจิ","Honcho-dori street (Fuji view)","本町通り（富士山の景色）",["honcho"]],
+  ["11:50–12:10","🚃 Shimoyoshida → Kawaguchiko (Fujikyu ~15 นาที)","Shimoyoshida → Kawaguchiko (Fujikyu ~15 min)","下吉田→河口湖（富士急 約15分）",["kawaguchikoSt"]],
+  ["12:15–13:30","🍲 <b>Houtou Fudou</b> โฮโตะ","Lunch: hoto noodles at Houtou Fudou","ほうとう不動で昼食",["houtou"]],
+  ["13:30–13:45","🎫 ซื้อ Sightseeing Bus 1-Day Pass","Buy sightseeing bus 1-day pass","周遊バス1日券を購入",["kawaguchikoSt"]],
+  ["13:50–15:20","🚌 Red Line → <b>Oishi Park</b>","Red Line bus → Oishi Park","レッドラインバスで大石公園へ",["oishi"]],
+  ["15:50–16:40","🚡 <b>Panoramic Ropeway</b> · ระฆังคู่รัก<span class='w'>⚠️ ปิด ~17:00</span>","Mt. Fuji Panoramic Ropeway","富士山パノラマロープウェイ",["ropeway"]],
+  ["16:45–17:30","♨️ แช่เท้าฟรีที่สถานี Kawaguchiko","Foot bath at Kawaguchiko Station","河口湖駅の足湯",["kawaguchikoSt"]],
+  ["17:41","🚄 <b>Fuji Excursion 48</b> (Car 1 · 7-A, 7-B) → Shinjuku 19:40","Fuji Excursion 48 (Car 1, seats 7-A/7-B) → Shinjuku 19:40","富士回遊48号（1号車 7-A・7-B）→新宿 19:40",[]],
+  ["19:45–20:45","🛍️ Don Quijote Kabukicho / Bic Camera","Don Quijote / Bic Camera Shinjuku","ドン・キホーテ／ビックカメラ新宿",["donkiShinjuku"]],
+  ["~21:00","🚃 Yamanote → Ueno · มื้อเย็นชาบู","JR Yamanote → Ueno · dinner","山手線で上野へ・夕食",["onyasai","hotel"]]],
  food:[["<b>Houtou Fudou</b> โฮโตะ อาหารพื้นเมือง","houtou"],["<b>Onyasai Ueno</b> บุฟเฟ่ต์ชาบู ~¥4,000/คน","onyasai"]]},
 
-{id:"d21",d:21,w:"จันทร์",cls:"snow",title:"⛷️ Day Trip: เล่นหิมะ GALA Yuzawa",yen:"¥36,300",lv:2,
+{id:"d21",d:21,cls:"snow",lv:2,yen:"¥36,300",
+ t:["⛷️ Day Trip: เล่นหิมะ GALA Yuzawa","⛷️ Day trip: snow at GALA Yuzawa","⛷️ 日帰り：ガーラ湯沢で雪遊び"],
  chips:[["chip jr","JR Pass วันที่ 2"],["chip warn","Tanigawa 471 / 412"],["chip","🧺 ซักผ้ารอบใหญ่"]],
  stops:["uenoSt","gala","spagala","hotel"],
- boxes:[["tip","❄️ แนะนำ","เล่นหิมะ + เลื่อนหิมะ + กระเช้า + ออนเซ็น · ประกัน Sompo คุ้มครองเฉพาะในลาน ห้ามออกนอกเส้นทาง"]],
+ boxes:[["tip","❄️ แนะนำ","เล่นหิมะ + เลื่อนหิมะ + กระเช้า + ออนเซ็น · ประกัน Sompo คุ้มครองเฉพาะในลาน"]],
  rows:[
-  ["07:00–07:30","🍙 ซื้อ Ekiben ไปกินบนรถไฟ",L("uenoSt")],
-  ["07:42","🚄 <b>Tanigawa 471</b> Ueno → <b>GALA Yuzawa</b> 9:03<span class='w'>⚠️ ถ้าวันนั้นไม่มีขบวนนี้ ใช้ 403 ออก 8:09 ถึง 9:38</span>",L("uenoSt")],
-  ["09:05–09:45","🎿 เช่าชุดสกี ถุงมือ · บัตรกระเช้า · ล็อกเกอร์",L("gala")],
-  ["09:45–12:30","🚡 กระเช้าขึ้นเขา → Snow Enjoyment Park: เลื่อนหิมะ ปั้นตุ๊กตาหิมะ · ระฆังคู่รัก 📸",[]],
-  ["12:30–13:30","🍛 แกงกะหรี่/ราเมงบนภูเขา",[]],
-  ["13:30–14:30","📸 เล่นหิมะต่อ แล้วลงมาคืนอุปกรณ์",[]],
-  ["14:30–15:30","♨️ <b>SPA GALA</b> ~¥900/คน<span class='w'>⚠️ อาบน้ำก่อนลงบ่อ แยกชาย-หญิง</span>",L("spagala")],
-  ["15:30–15:50","🛍️ ของฝากในสถานี",L("gala")],
-  ["15:56","🚄 <b>Tanigawa 412</b> → Ueno 17:14",[]],
-  ["17:30","<b>ใส่เครื่องซักผ้า</b> (ถุงเท้าหนา ชุดชั้นในที่ชื้น)",L("hotel")],
-  ["18:00–20:00","🍖 มื้อเย็นใกล้โรงแรม · เก็บผ้า",L("ichiran","torikizoku")]]},
+  ["07:00–07:30","🍙 ซื้อ Ekiben ไปกินบนรถไฟ","Buy an ekiben","駅弁を購入",["uenoSt"]],
+  ["07:42","🚄 <b>Tanigawa 471</b> Ueno → <b>GALA Yuzawa</b> 9:03<span class='w'>⚠️ ถ้าไม่มีขบวนนี้ ใช้ 403 ออก 8:09</span>","Tanigawa 471: Ueno → GALA Yuzawa 09:03","たにがわ471号 上野→ガーラ湯沢 09:03",["uenoSt"]],
+  ["09:05–09:45","🎿 เช่าชุดสกี ถุงมือ · บัตรกระเช้า · ล็อกเกอร์","Rent ski wear & gloves · gondola ticket","スキーウェア・手袋レンタル・ゴンドラ券",["gala"]],
+  ["09:45–12:30","🚡 กระเช้าขึ้นเขา → เลื่อนหิมะ · ระฆังคู่รัก 📸","Gondola up → snow play & sledding","ゴンドラで山頂へ→雪遊び・そり",[]],
+  ["12:30–13:30","🍛 กลางวันบนภูเขา","Lunch on the mountain","山頂で昼食",[]],
+  ["13:30–14:30","📸 เล่นหิมะต่อ แล้วคืนอุปกรณ์","More snow play · return rentals","雪遊び・レンタル返却",[]],
+  ["14:30–15:30","♨️ <b>SPA GALA</b> ~¥900/คน","SPA GALA hot spring","SPAガーラの湯",["spagala"]],
+  ["15:30–15:50","🛍️ ของฝากในสถานี","Souvenirs at the station","駅でお土産",["gala"]],
+  ["15:56","🚄 <b>Tanigawa 412</b> → Ueno 17:14","Tanigawa 412 → Ueno 17:14","たにがわ412号→上野 17:14",[]],
+  ["17:30","<b>ใส่เครื่องซักผ้า</b>","Laundry at hotel","ホテルで洗濯",["hotel"]],
+  ["18:00–20:00","🍖 มื้อเย็นใกล้โรงแรม","Dinner near hotel","ホテル近くで夕食",["ichiran","torikizoku"]]]},
 
-{id:"d22",d:22,w:"อังคาร",cls:"disney",title:"🌊 Tokyo DisneySea",yen:"¥50,400",lv:3,
+{id:"d22",d:22,cls:"disney",lv:3,yen:"¥50,400",
+ t:["🌊 Tokyo DisneySea","🌊 Tokyo DisneySea","🌊 東京ディズニーシー"],
  chips:[["chip ok","ตั๋วซื้อแล้ว"],["chip jr","JR Pass วันที่ 3"],["chip dis","Premier Access"]],
  stops:["maihama","resortGw","tds","canaletto","hotel"],
  rows:[
-  ["06:45","ตื่น · มื้อเช้า konbini",[]],
-  ["07:30–08:10","🚃 Ueno → Tokyo → JR Keiyo → Maihama (JR Pass)",L("maihama")],
-  ["08:10–08:25","🚝 Disney Resort Line จาก Resort Gateway → DisneySea (~¥300)",L("resortGw")],
-  ["08:25–09:00","เข้าแถวหน้าประตู",L("tds")],
-  ["09:00–11:30","🧚 <b>Fantasy Springs</b>: Frozen Journey · Rapunzel · Peter Pan<span class='h'>💡 ซื้อ Premier Access ในแอปทันทีที่เข้าสวน</span>",[]],
-  ["11:30–12:30","🍜 Gyoza Dog · Casbah Food Court",[]],
-  ["12:30–15:30","🎢 Soaring · Journey to the Center of the Earth · Toy Story Mania · Tower of Terror",[]],
-  ["15:30–17:00","🛍️ Duffy & ShellieMay · ต้นคริสต์มาสริมท่าเรือ",[]],
-  ["17:00–18:30","🍝 มื้อเย็นริมท่าเรือ",L("canaletto")],
-  ["18:30–20:00","✨ การแสดงกลางคืน Mediterranean Harbor",[]],
-  ["20:30–21:15","🚃 กลับโรงแรม",L("hotel")],
-  ["21:30–23:00","🧳 แพ็กกระเป๋า แยกของ Tax-free · ตั้งปลุก 06:00",[]]]},
+  ["06:45","ตื่น · มื้อเช้า konbini","Breakfast","朝食",[]],
+  ["07:30–08:10","🚃 Ueno → Tokyo → JR Keiyo → Maihama (JR Pass)","Ueno → Tokyo → JR Keiyo Line → Maihama","上野→東京→JR京葉線→舞浜",["maihama"]],
+  ["08:10–08:25","🚝 Disney Resort Line → DisneySea (~¥300)","Disney Resort Line → DisneySea","ディズニーリゾートラインで東京ディズニーシーへ",["resortGw"]],
+  ["08:25–09:00","เข้าแถวหน้าประตู","Queue at the entrance","入口で開園待ち",["tds"]],
+  ["09:00–11:30","🧚 <b>Fantasy Springs</b>: Frozen · Rapunzel · Peter Pan<span class='h'>💡 ซื้อ Premier Access ทันที</span>","Fantasy Springs: Frozen · Rapunzel · Peter Pan","ファンタジースプリングス：アナ雪・ラプンツェル・ピーターパン",[]],
+  ["11:30–12:30","🍜 Gyoza Dog · Casbah Food Court","Lunch: Casbah Food Court","昼食：カスバ・フードコート",[]],
+  ["12:30–15:30","🎢 Soaring · Journey to the Center of the Earth · Toy Story Mania · Tower of Terror","Soaring · Journey to the Center of the Earth · Toy Story Mania · Tower of Terror","ソアリン・センター・オブ・ジ・アース・トイ・ストーリー・マニア・タワー・オブ・テラー",[]],
+  ["15:30–17:00","🛍️ Duffy & ShellieMay · ต้นคริสต์มาส","Duffy & ShellieMay shopping","ダッフィー＆シェリーメイのお土産",[]],
+  ["17:00–18:30","🍝 มื้อเย็นริมท่าเรือ","Dinner by the harbor","ハーバー沿いで夕食",["canaletto"]],
+  ["18:30–20:00","✨ การแสดงกลางคืน Mediterranean Harbor","Night show at Mediterranean Harbor","メディテレーニアンハーバーの夜のショー",[]],
+  ["20:30–21:15","🚃 กลับโรงแรม","Back to hotel","ホテルへ戻る",["hotel"]],
+  ["21:30–23:00","🧳 แพ็กกระเป๋า แยกของ Tax-free","Pack luggage","荷造り",[]]]},
 
-{id:"d23",d:23,w:"พุธ",cls:"",title:"✈️ กลับบ้าน · XJ603",yen:"¥3,500",lv:1,
+{id:"d23",d:23,cls:"",lv:1,yen:"¥3,500",
+ t:["✈️ กลับบ้าน · XJ603","✈️ Fly home · XJ603","✈️ 帰国・XJ603"],
  chips:[["chip warn","ไม่มีเวลาช้อปเช้านี้"],["chip","Narita T2"]],
  stops:["keiseiUeno","nrtAirport"],
  rows:[
-  ["06:00","⏰ ตื่น · ของ Tax-free อยู่ใบที่หยิบง่าย",[]],
-  ["06:30","เช็กเอาต์ · มื้อเช้า konbini",[]],
-  ["~07:00–07:45","🚄 Skyliner → ลงสถานี <b>Narita Airport Terminal 2·3</b>",L("keiseiUeno")],
-  ["08:00–08:40","🧾 <b>ตู้คืนภาษีศุลกากร ก่อนเช็กอิน</b>",L("nrtAirport")],
-  ["08:40–09:30","✈️ เช็กอิน AirAsia X → ตม.ขาออก",[]],
-  ["09:30–10:30","🛍️ Duty Free: Royce · Tokyo Banana · KitKat",[]],
-  ["~11:10","✈️ XJ603 → ดอนเมือง",[]]]}
+  ["06:00","⏰ ตื่น","Wake up","起床",[]],
+  ["06:30","เช็กเอาต์ · มื้อเช้า konbini","Check out · breakfast","チェックアウト・朝食",[]],
+  ["~07:00–07:45","🚄 Skyliner → <b>Narita Airport Terminal 2·3</b>","Skyliner → Narita Airport Terminal 2·3 Station","スカイライナーで空港第2ビル駅へ",["keiseiUeno"]],
+  ["08:00–08:40","🧾 <b>ตู้คืนภาษีศุลกากร ก่อนเช็กอิน</b>","Tax refund (customs kiosk) before check-in","チェックイン前に税関で免税手続き",["nrtAirport"]],
+  ["08:40–09:30","✈️ เช็กอิน AirAsia X → ตม.ขาออก","Check in AirAsia X → departure immigration","エアアジアXチェックイン→出国審査",[]],
+  ["09:30–10:30","🛍️ Duty Free","Duty free shopping","免税店で買い物",[]],
+  ["~11:10","✈️ XJ603 → ดอนเมือง","XJ603 → Bangkok (Don Mueang)","XJ603 バンコク（ドンムアン）へ",[]]]}
 ];
 
-const LV = {1:["lv1","🟢 เบา"],2:["lv2","🟡 ปานกลาง"],3:["lv3","🔴 หนัก"]};
-const esc = s => s.replace(/"/g,'&quot;');
-const stopHTML = (k,i) => { const p=P[k]; return `<div class="stop"><span class="n">${i+1}</span><span class="nm">${p[0]}</span>
-  <a class="pin" href="${PIN(p[1])}" target="_blank" rel="noopener">📍</a><a class="go" href="${GO(p[1],'transit')}" target="_blank" rel="noopener">นำทาง</a></div>`; };
-const linksHTML = keys => keys.length ? `<span class="ml">${keys.map(k=>`<a href="${GO(P[k][1],'transit')}" target="_blank" rel="noopener">🧭 ${P[k][0]}</a>`).join('')}</span>` : '';
+// ---------- render ----------
+function jstToday(){ const n=new Date(Date.now()+9*3600e3); return {y:n.getUTCFullYear(),m:n.getUTCMonth()+1,d:n.getUTCDate()}; }
+const T=jstToday(); const todayD=(T.y===2026&&T.m===12&&T.d>=16&&T.d<=23)?T.d:null;
 
-function jstToday(){ const now=new Date(Date.now()+9*3600e3); return {y:now.getUTCFullYear(),m:now.getUTCMonth()+1,d:now.getUTCDate()}; }
-const T = jstToday(); const todayD = (T.y===2026&&T.m===12&&T.d>=16&&T.d<=23)?T.d:null;
+function stopHTML(k,i){ const q=P[k][3];
+  const sub = LANG==='th' ? `<span class="jn">${P[k][2]}</span>` : (LANG==='en'?`<span class="jn">${P[k][2]}</span>`:`<span class="jn">${P[k][1]}</span>`);
+  return `<div class="stop"><span class="n">${i+1}</span><span class="nm">${pname(k)}${sub}</span>
+  <button class="ask" onclick="openAsk('${k}')">🙋</button>
+  <a class="pin" href="${PIN(q)}" target="_blank" rel="noopener">📍</a><a class="go" href="${GO(q)}" target="_blank" rel="noopener">${UI[LANG].go}</a></div>`; }
+const linksHTML = keys => keys.length ? `<span class="ml">${keys.map(k=>`<a href="${GO(P[k][3])}" target="_blank" rel="noopener">🧭 ${pname(k)}</a>`).join('')}</span>` : '';
 
-const nav=document.getElementById('daynav'), tl=document.getElementById('timeline');
-DAYS.forEach((x,i)=>{
-  nav.insertAdjacentHTML('beforeend',`<a href="#${x.id}" class="${x.d===todayD?'today':''}"><b>${x.d}</b>${x.w}</a>`);
-  const rows=x.rows.map(r=>`<tr><td class="t">${r[0]}</td><td>${r[1]}${linksHTML(r[2])}</td></tr>`).join('');
-  const boxes=(x.boxes||[]).map(b=>`<div class="box ${b[0]}"><h4>${b[1]}</h4>${b[2]}</div>`).join('');
-  const bday=x.bday?`<div class="box bday"><h4>🎁 ทำให้เป็นวันเกิดที่จำไปตลอด</h4><ol>${x.bday.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
-  const food=x.food?`<div class="food"><h4>🍽️ ร้านแนะนำ</h4><ul>${x.food.map(f=>`<li><span>${f[0]}</span><a href="${GO(P[f[1]][1],'walking')}" target="_blank" rel="noopener">🧭 ไป</a></li>`).join('')}</ul></div>`:'';
-  const isToday=x.d===todayD;
-  tl.insertAdjacentHTML('beforeend',`<section class="day" id="${x.id}"><div class="card ${x.cls} ${isToday?'today':''}">
-    <div class="dh"><div><div class="dlabel">วันที่ ${i+1} · ${x.w} ${x.d} ธ.ค.${isToday?' · 📍 วันนี้':''}</div><h3>${x.title}</h3></div><span class="yen">${x.yen}</span></div>
-    <div class="chips"><span class="chip ${LV[x.lv][0]}">${LV[x.lv][1]}</span>${x.chips.map(c=>`<span class="${c[0]}">${c[1]}</span>`).join('')}</div>
-    <div class="quick"><div class="lbl">🗺️ จุดหมายวันนี้ (เรียงตามลำดับ)</div><div class="stops">${x.stops.map(stopHTML).join('')}</div></div>
-    <details class="more" ${isToday?'open':''}><summary>ตารางเวลา & คำแนะนำ</summary>
-      ${x.intro?`<div class="intro">${x.intro}</div>`:''}${bday}${boxes}<table class="tt">${rows}</table>${food}
-    </details></div></section>`);
-});
-document.querySelectorAll('[data-go]').forEach(a=>{const p=P[a.dataset.go];a.href=GO(p[1],p[2]);a.target='_blank';a.rel='noopener';});
-if(todayD){ setTimeout(()=>document.getElementById('d'+todayD).scrollIntoView(),150); }
+function render(){
+  const U=UI[LANG]; document.body.className='L-'+LANG; document.documentElement.lang=LANG==='ja'?'ja':LANG;
+  document.getElementById('h1').textContent=U.h1;
+  document.getElementById('sub').textContent=U.sub;
+  document.getElementById('howto').innerHTML=U.howto;
+  document.getElementById('foot').textContent=U.foot;
+  document.querySelector('.totop').textContent=U.top;
+  document.querySelectorAll('.langbar button').forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));
+  // general ask card (EN/JA)
+  document.getElementById('askGeneral').innerHTML = `<div class="big">すみません。タイから来た旅行者です。<br>日本語があまり話せません。</div>
+    <div style="margin-top:6px">Excuse me, we are travellers from Thailand and don't speak Japanese well. Our plan is below — thank you for your help!</div>
+    <div class="chips" style="margin-top:10px"><button class="ask" onclick="openAsk('hotel')">🏨 ${pname('hotel')}</button></div>`;
+  // trains (EN/JA)
+  const tr = LANG==='ja'
+   ? [["12/20 行き","富士回遊3号","2号車 2-C・2-D","新宿 07:30 → 下吉田 09:11"],["12/20 帰り","富士回遊48号","1号車 7-A・7-B","河口湖 17:41 → 新宿 19:40"],["12/21 行き","たにがわ471号","","上野 07:42 → ガーラ湯沢 09:03"],["12/21 帰り","たにがわ412号","","ガーラ湯沢 15:56 → 上野 17:14"]]
+   : [["Dec 20 out","Fuji Excursion 3","Car 2 · 2-C, 2-D","Shinjuku 07:30 → Shimoyoshida 09:11"],["Dec 20 back","Fuji Excursion 48","Car 1 · 7-A, 7-B","Kawaguchiko 17:41 → Shinjuku 19:40"],["Dec 21 out","Tanigawa 471","","Ueno 07:42 → GALA Yuzawa 09:03"],["Dec 21 back","Tanigawa 412","","GALA Yuzawa 15:56 → Ueno 17:14"]];
+  document.getElementById('trainIntl').innerHTML = `<h2>🚄 ${LANG==='ja'?'予約済みの列車（JR東京ワイドパス）':'Our train reservations (JR Tokyo Wide Pass)'}</h2>
+    <table class="g">${tr.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b><br><small>${r[2]}</small></td><td>${r[3]}</td></tr>`).join('')}</table>`;
+
+  const nav=document.getElementById('daynav'), tl=document.getElementById('timeline'); nav.innerHTML=''; tl.innerHTML='';
+  const li=LI[LANG];
+  DAYS.forEach((x,i)=>{
+    const wd=U.w[i];
+    nav.insertAdjacentHTML('beforeend',`<a href="#${x.id}" class="${x.d===todayD?'today':''}"><b>${x.d}</b>${wd}</a>`);
+    const rows=x.rows.map(r=>`<tr><td class="t">${(LANG!=='th'&&/[ก-๙]/.test(r[0]))?(LANG==='ja'?'12/'+(x.d-1)+'夜':'Night before'):r[0]}</td><td>${r[1+li]}${linksHTML(r[4])}</td></tr>`).join('');
+    const isTH=LANG==='th';
+    const boxes=isTH?(x.boxes||[]).map(b=>`<div class="box ${b[0]}"><h4>${b[1]}</h4>${b[2]}</div>`).join(''):'';
+    const bday=(isTH&&x.bday)?`<div class="box bday"><h4>🎁 ทำให้เป็นวันเกิดที่จำไปตลอด</h4><ol>${x.bday.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
+    const food=(isTH&&x.food)?`<div class="food"><h4>${U.foodH}</h4><ul>${x.food.map(f=>`<li><span>${f[0]}</span><a href="${GO(P[f[1]][3])}" target="_blank" rel="noopener">${U.foodGo}</a></li>`).join('')}</ul></div>`:'';
+    const chips=isTH?x.chips.map(c=>`<span class="${c[0]}">${c[1]}</span>`).join(''):'';
+    const isToday=x.d===todayD;
+    const dl = LANG==='ja' ? `${i+1}日目 · 12月${x.d}日（${wd}）` : LANG==='en' ? `Day ${i+1} · ${wd}, Dec ${x.d}` : `วันที่ ${i+1} · ${wd} ${x.d} ธ.ค.`;
+    tl.insertAdjacentHTML('beforeend',`<section class="day" id="${x.id}"><div class="card ${x.cls} ${isToday?'today':''}">
+      <div class="dh"><div><div class="dlabel">${dl}${isToday?' · '+U.today:''}</div><h3>${x.t[li]}</h3></div>${isTH?`<span class="yen">${x.yen}</span>`:''}</div>
+      <div class="chips"><span class="chip ${['','lv1','lv2','lv3'][x.lv]}">${U.lv[x.lv]}</span>${chips}</div>
+      <div class="quick"><div class="lbl">${U.stops}</div><div class="stops">${x.stops.map(stopHTML).join('')}</div></div>
+      <details class="more" ${isToday?'open':''}><summary>${U.more}</summary>
+        ${(isTH&&x.intro)?`<div class="intro">${x.intro}</div>`:''}${bday}${boxes}<table class="tt">${rows}</table>${food}
+      </details></div></section>`);
+  });
+  document.querySelectorAll('[data-go]').forEach(a=>{a.href=GO(P[a.dataset.go][3]);a.target='_blank';a.rel='noopener';});
+}
+function setLang(l){ LANG=l; try{localStorage.setItem('tripLang',l);}catch(e){} render(); }
+function openAsk(k){
+  document.getElementById('ovPhrase').textContent=ASK.phrase;
+  document.getElementById('ovName').textContent=P[k][2];
+  document.getElementById('ovSub').textContent=P[k][1];
+  document.getElementById('ovQ').innerHTML=ASK.q;
+  document.getElementById('ovGo').href=GO(P[k][3]);
+  document.getElementById('ov').classList.add('show');
+}
+function closeAsk(){ document.getElementById('ov').classList.remove('show'); }
+document.querySelectorAll('.langbar button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l)));
+render();
+if(todayD){ setTimeout(()=>{const e=document.getElementById('d'+todayD); if(e) e.scrollIntoView();},150); }
+
 </script>
 </body>
 </html>
